@@ -1,0 +1,43 @@
+create database exam;
+use exam;
+
+create table customers(
+customer_id  int primary key,
+ name varchar(100) not null, 
+ city varchar(50));
+
+create table accounts(
+account_id int primary key,
+ customer_id int unique, 
+ balance double check(balance>=0), 
+ account_type varchar(50),
+ foreign key (customer_id) references customers(customer_id));
+
+insert into customers(customer_id, name,city) values
+(107, 'josef', 'kakinada'),
+(104,'chanadana', 'hyderabad'),
+(105, 'surya', 'hyderabad'),
+(106, 'staish', 'vizag'),
+ (101,'ram','kakinada'),
+(102,'raj','vijayawada'),
+(103,'mani','vizag');
+
+insert into accounts(account_id,customer_id, balance, account_type) values
+(010108, 107, 1500, 'current account'),
+(101150, 104,1000000,'saving account'),
+(101666, 105, 69000, 'current account'),
+(101100, 106, 400000, ' saving account'),
+(010224, 101,75000, 'savings account'),
+(010143, 103,92999 , 'current account'),
+(010420, 102,50000, 'savings account');
+
+update  accounts set balance = balance +2000 where customer_id =101;
+update accounts set balance = balance-1000 where customer_id = 102 and balance >1000;
+
+delete from accounts where balance<2000;
+select * from customers where city ='hyderabad';
+select * from accounts where balance >5000;
+select * from accounts order by balance desc;
+
+
+select * from accounts;
